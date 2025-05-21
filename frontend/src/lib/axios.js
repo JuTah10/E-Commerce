@@ -1,9 +1,7 @@
 import axios from "axios"
 
-console.log( import.meta.env.VITE_BACKEND_URL)
-
 const axiosInstance = axios.create({
-    baseURL: import.meta.env.VITE_BACKEND_URL,
+    baseURL: import.meta.env.VITE_BACKEND_URL || "https://react-ecommerce-clothing-store-backend.onrender.com/api",
     withCredentials: true // send cookies to the server //
 })
 
