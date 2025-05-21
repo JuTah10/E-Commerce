@@ -99,33 +99,47 @@ export const useUserStore = create((set, get) => ({
 }));
 
 let refreshPromise = null;
+let interceptorAttached = false;
 
-axios.interceptors.response.use(
+if (!interceptorAttached) {
+  axios.interceptors.response.use(
     (response) => response,
     async (error) => {
+      const originalRequest = error.config;
 
-        const originalRequest = error.config;
-        if (error.response?.status === 401 &&
-            !originalRequest._retry ) {
+      const is401 = error.response?.status === 401;
+      const isRetryable =
+        !originalRequest._retry &&
+        !originalRequest.url.includes("/auth/login") &&
+        !originalRequest.url.includes("/auth/signup") &&
+        !originalRequest.url.includes("/auth/logout") &&
+        !originalRequest.url.includes("/auth/refresh-token");
 
-            originalRequest._retry = true;
+      if (is401 && isRetryable) {
+        originalRequest._retry = true;
 
-            try {
-                if (refreshPromise) {
-                    await refreshPromise;
-                    return axios(originalRequest)
-                }
+        try {
+          // If a refresh is already happening, wait for it
+          if (refreshPromise) {
+            await refreshPromise;
+            return axios(originalRequest);
+          }
 
-                refreshPromise = useUserStore.getState().refreshToken();
-                await refreshPromise;
-                refreshPromise = null;
+          refreshPromise = useUserStore.getState().refreshToken();
+          await refreshPromise;
+          refreshPromise = null;
 
-                return axios(originalRequest);
-            } catch (refreshError) {
-                useUserStore.getState().logout();
-                return Promise.reject(refreshError);
-            }
+          return axios(originalRequest);
+        } catch (refreshError) {
+          refreshPromise = null;
+          await useUserStore.getState().logOut(); // ✅ correct method name
+          return Promise.reject(refreshError);
         }
-        return Promise.reject(error);
+      }
+
+      return Promise.reject(error);
     }
-)
+  );
+
+  interceptorAttached = true;
+}
