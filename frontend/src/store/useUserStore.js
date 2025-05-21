@@ -90,7 +90,6 @@ export const useUserStore = create((set, get) => ({
                 }
             })
 
-            await get().checkAuth();
         } catch (error) {
             set({ error: error.response.data.message });
         } finally {
@@ -101,47 +100,32 @@ export const useUserStore = create((set, get) => ({
 }));
 
 let refreshPromise = null;
-let interceptorAttached = false;
 
-if (!interceptorAttached) {
-    axios.interceptors.response.use(
-        (response) => response,
-        async (error) => {
-            const originalRequest = error.config;
+axios.interceptors.response.use(
+	(response) => response,
+	async (error) => {
+		const originalRequest = error.config;
+		if (error.response?.status === 401 && !originalRequest._retry) {
+			originalRequest._retry = true;
 
-            const is401 = error.response?.status === 401;
-            const isRetryable =
-                !originalRequest._retry &&
-                !originalRequest.url.includes("/auth/login") &&
-                !originalRequest.url.includes("/auth/signup") &&
-                !originalRequest.url.includes("/auth/logout") &&
-                !originalRequest.url.includes("/auth/refresh-token");
+			try {
+	
+				if (refreshPromise) {
+					await refreshPromise;
+					return axios(originalRequest);
+				}
 
-            if (is401 && isRetryable) {
-                originalRequest._retry = true;
+				refreshPromise = useUserStore.getState().refreshToken();
+				await refreshPromise;
+				refreshPromise = null;
 
-                try {
-                    // If a refresh is already happening, wait for it
-                    if (refreshPromise) {
-                        await refreshPromise;
-                        return axios(originalRequest);
-                    }
-
-                    refreshPromise = useUserStore.getState().refreshToken();
-                    await refreshPromise;
-                    refreshPromise = null;
-
-                    return axios(originalRequest);
-                } catch (refreshError) {
-                    refreshPromise = null;
-                    await useUserStore.getState().logOut(); // ✅ correct method name
-                    return Promise.reject(refreshError);
-                }
-            }
-
-            return Promise.reject(error);
-        }
-    );
-
-    interceptorAttached = true;
-}
+				return axios(originalRequest);
+			} catch (refreshError) {
+		
+				useUserStore.getState().logOut();
+				return Promise.reject(refreshError);
+			}
+		}
+		return Promise.reject(error);
+	}
+);
