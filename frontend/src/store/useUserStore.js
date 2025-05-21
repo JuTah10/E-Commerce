@@ -89,6 +89,8 @@ export const useUserStore = create((set, get) => ({
                     "Expires": "0",
                 }
             })
+
+            await get().checkAuth();
         } catch (error) {
             set({ error: error.response.data.message });
         } finally {
@@ -102,44 +104,44 @@ let refreshPromise = null;
 let interceptorAttached = false;
 
 if (!interceptorAttached) {
-  axios.interceptors.response.use(
-    (response) => response,
-    async (error) => {
-      const originalRequest = error.config;
+    axios.interceptors.response.use(
+        (response) => response,
+        async (error) => {
+            const originalRequest = error.config;
 
-      const is401 = error.response?.status === 401;
-      const isRetryable =
-        !originalRequest._retry &&
-        !originalRequest.url.includes("/auth/login") &&
-        !originalRequest.url.includes("/auth/signup") &&
-        !originalRequest.url.includes("/auth/logout") &&
-        !originalRequest.url.includes("/auth/refresh-token");
+            const is401 = error.response?.status === 401;
+            const isRetryable =
+                !originalRequest._retry &&
+                !originalRequest.url.includes("/auth/login") &&
+                !originalRequest.url.includes("/auth/signup") &&
+                !originalRequest.url.includes("/auth/logout") &&
+                !originalRequest.url.includes("/auth/refresh-token");
 
-      if (is401 && isRetryable) {
-        originalRequest._retry = true;
+            if (is401 && isRetryable) {
+                originalRequest._retry = true;
 
-        try {
-          // If a refresh is already happening, wait for it
-          if (refreshPromise) {
-            await refreshPromise;
-            return axios(originalRequest);
-          }
+                try {
+                    // If a refresh is already happening, wait for it
+                    if (refreshPromise) {
+                        await refreshPromise;
+                        return axios(originalRequest);
+                    }
 
-          refreshPromise = useUserStore.getState().refreshToken();
-          await refreshPromise;
-          refreshPromise = null;
+                    refreshPromise = useUserStore.getState().refreshToken();
+                    await refreshPromise;
+                    refreshPromise = null;
 
-          return axios(originalRequest);
-        } catch (refreshError) {
-          refreshPromise = null;
-          await useUserStore.getState().logOut(); // ✅ correct method name
-          return Promise.reject(refreshError);
+                    return axios(originalRequest);
+                } catch (refreshError) {
+                    refreshPromise = null;
+                    await useUserStore.getState().logOut(); // ✅ correct method name
+                    return Promise.reject(refreshError);
+                }
+            }
+
+            return Promise.reject(error);
         }
-      }
+    );
 
-      return Promise.reject(error);
-    }
-  );
-
-  interceptorAttached = true;
+    interceptorAttached = true;
 }
