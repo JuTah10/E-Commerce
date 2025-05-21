@@ -10,7 +10,7 @@ export const useUserStore = create((set, get) => ({
     },
     loading: false,
     error: null,
-    checkingAuth: false,
+    checkingAuth: true,
 
     createNewAccount: async ({ name, email, password, confirmPassword }) => {
         set({ loading: true, error: null });
@@ -39,7 +39,7 @@ export const useUserStore = create((set, get) => ({
             set({ user: { email: response.data.data.email, userName: response.data.data.name, userRole: response.data.data.userRole } })
 
         } catch (error) {
-            set({ error: error?.response?.data?.message || "Log in failed!" });
+            set({ error: error?.response?.data?.message });
         } finally {
             set({ loading: false });
         }
