@@ -37,7 +37,7 @@ export const useUserStore = create((set, get) => ({
             const response = await axios.post("/auth/login", { email, password });
 
             set({ user: { email: response.data.data.email, userName: response.data.data.name, userRole: response.data.data.userRole } })
-
+            await new Promise((res) => setTimeout(res, 200));
         } catch (error) {
             set({ error: error?.response?.data?.message });
         } finally {
@@ -102,30 +102,30 @@ export const useUserStore = create((set, get) => ({
 let refreshPromise = null;
 
 axios.interceptors.response.use(
-	(response) => response,
-	async (error) => {
-		const originalRequest = error.config;
-		if (error.response?.status === 401 && !originalRequest._retry) {
-			originalRequest._retry = true;
+    (response) => response,
+    async (error) => {
+        const originalRequest = error.config;
+        if (error.response?.status === 401 && !originalRequest._retry) {
+            originalRequest._retry = true;
 
-			try {
-	
-				if (refreshPromise) {
-					await refreshPromise;
-					return axios(originalRequest);
-				}
+            try {
 
-				refreshPromise = useUserStore.getState().refreshToken();
-				await refreshPromise;
-				refreshPromise = null;
+                if (refreshPromise) {
+                    await refreshPromise;
+                    return axios(originalRequest);
+                }
 
-				return axios(originalRequest);
-			} catch (refreshError) {
-		
-				useUserStore.getState().logOut();
-				return Promise.reject(refreshError);
-			}
-		}
-		return Promise.reject(error);
-	}
+                refreshPromise = useUserStore.getState().refreshToken();
+                await refreshPromise;
+                refreshPromise = null;
+
+                return axios(originalRequest);
+            } catch (refreshError) {
+
+                useUserStore.getState().logOut();
+                return Promise.reject(refreshError);
+            }
+        }
+        return Promise.reject(error);
+    }
 );
