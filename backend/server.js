@@ -11,7 +11,6 @@ import paymentRoute from "./routes/paymentRoute.js"
 import orderRoute from "./routes/orderRoute.js"
 import cookieParser from "cookie-parser";
 
-import { isSpoofedBot } from "@arcjet/inspect"; //for rate limiting later
 
 dotenv.config();
 
@@ -21,15 +20,9 @@ const PORT = process.env.PORT;
 app.use(express.json()); //for destructoring req.body
 app.use(cookieParser());
 
-const allowedOrigins = [
-  process.env.CLIENT_URL,          // e.g. "http://localhost:5173"
-  process.env.CLIENT_LAN_URL
-];
-
-
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: "http://localhost:5173",
     credentials: true,             // Allow cookies/Authorization header
   })
 );
