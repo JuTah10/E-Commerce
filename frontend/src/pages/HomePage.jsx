@@ -23,7 +23,7 @@ function HomePage() {
       {/* Wallpaper / Intro */}
       <div className='absolute top-0 left-0 w-full h-screen z-[-1]'>
         <img
-          src="/images/homePagewallpaper.avif"
+          src="https://res.cloudinary.com/dc3gnvd4e/image/upload/v1748039941/homePagewallpaper_c6s6gf.png"
           alt='wallpaper'
           className='object-cover w-full h-full' />
       </div>
