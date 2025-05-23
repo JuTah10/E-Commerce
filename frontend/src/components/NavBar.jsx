@@ -138,7 +138,7 @@ function NavBar() {
                                 </>
 
                                 :
-                                <li className='hover:text-green-500' onClick={() => setIsMenuOpen(false)}><Link to="/signup" className={`hover:text-green-500 ${currentLocation === '/signup' ? 'text-green-600' : textColor} flex justify-start items-center gap-1`} ><User /> Sign up</Link></li>
+                                <li className='hover:text-green-500' onClick={() => setIsMenuOpen(false)}><Link to="/login" className={`hover:text-green-500 ${currentLocation === '/signup' ? 'text-green-600' : textColor} flex justify-start items-center gap-1`} ><User /> Log in</Link></li>
                             }
                         </ul>
                     </div>
