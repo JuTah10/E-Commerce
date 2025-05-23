@@ -65,7 +65,7 @@ function NavBar() {
     }
 
     return (
-        <header className={`fixed top-0 left-0 w-full z-[100] transition-all duration-300
+        <header className={`fixed top-0 left-0 w-full z-[9999] transition-all duration-300
             ${(currentLocation === "/" || currentLocation === "/about") ? `${scrolled ? 'bg-white text-black shadow-md border-b' : 'bg-transparent text-white'} ` : 'bg-white text-black shadow-md border-b'}`}>
 
             <div className="max-w-7xl mx-auto flex justify-between items-center px-4 md:px-8 py-6">
