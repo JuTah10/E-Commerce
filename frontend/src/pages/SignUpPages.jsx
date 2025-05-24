@@ -37,7 +37,7 @@ function SignUpPages() {
                     animate={!switchPage ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                     transition={!switchPage ? { duration: 0.4 } : { duration: 0.4, delay: 1.0 }}
                 >
-                    <img src="/images/sneakerSignUpPage.avif" alt="Sneakers" className="h-full object-cover rounded-2xl" />
+                    <img src="https://res.cloudinary.com/dc3gnvd4e/image/upload/v1748097569/sneakerSignUpPage_asxat5.avif" alt="Sneakers" className="h-full object-cover rounded-2xl" />
                 </motion.div>
 
                 {/* for user sign up page */}
