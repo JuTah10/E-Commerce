@@ -37,6 +37,6 @@ app.use("/api/coupon", couponRoute);
 app.use("/api/payment", paymentRoute);
 app.use("/api/order", orderRoute);
 
-app.listen(PORT, () => {
-    console.log(`Server is currently running on ${PORT}`)
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server is currently running on ${PORT}`)
 })
