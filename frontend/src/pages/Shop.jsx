@@ -54,7 +54,7 @@ export default function Shop() {
                 <img
                     className='min-w-full max-h-[400px] object-cover'
                     style={{ objectPosition: 'center 10%' }}
-                    src="/images/shopWallpaper.avif"
+                    src="https://res.cloudinary.com/dc3gnvd4e/image/upload/v1748096298/shopWallpaper_rhjj5s.png"
                     alt="shop wallpaper" />
                 <h1 className='absolute w-screen h-[400px] top-0 flex justify-center items-center font-pacifico md:text-3xl sm:text-2xl text-white'>Shop</h1>
             </div>
