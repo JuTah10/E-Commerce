@@ -10,7 +10,7 @@ export default function About() {
     <div>
       {/* Subtle background image */}
       <img
-        src="/images/AboutPageWallPaper.avif"
+        src="https://res.cloudinary.com/dc3gnvd4e/image/upload/v1748096936/AboutPageWallPaper_rhedgo.png"
         alt=""
         className="absolute top-0 left-0 w-full h-[calc(100%-28.5rem)] z-[-1]"
       />
@@ -25,7 +25,7 @@ export default function About() {
           viewport={{ amount: 0.2 }}
         >
           <img
-            src="/images/AboutPage1.avif"
+            src="https://res.cloudinary.com/dc3gnvd4e/image/upload/v1748097002/AboutPage1_ukj1xi.webp"
             alt=""
             className="w-full max-w-md rounded-lg shadow-lg"
           />
@@ -172,7 +172,7 @@ export default function About() {
           viewport={{ amount: 0.2 }}
         >
           <img
-            src="/images/AboutPage2.avif"
+            src="https://res.cloudinary.com/dc3gnvd4e/image/upload/v1748097037/AboutPage2_a2rqqd.avif"
             alt=""
             className="w-full max-w-md rounded-lg shadow-lg"
           />
