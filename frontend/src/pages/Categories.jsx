@@ -57,7 +57,7 @@ export default function Categories() {
         <img
           className='min-w-full max-h-[400px] object-cover'
           style={{ objectPosition: 'center 40%' }}
-          src={`/images/${category}PageWallPaper.avif`}
+          src={`https://res.cloudinary.com/dc3gnvd4e/image/upload/${category}PageWallPaper_cr8epd.webp`} 
           alt="shop wallpaper" />
         <h1 className='absolute w-screen h-[400px] top-0 flex justify-center items-center font-pacifico md:text-3xl sm:text-2xl text-white'>{category[0].toUpperCase() + category.slice(1)}</h1>
       </div>
