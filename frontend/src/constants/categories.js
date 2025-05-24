@@ -4,43 +4,42 @@ export const categories = [
     {
         href: "hoodies",
         name: "Hoodies",
-        image: "/images/categories/hoodies.avif"
+        image: "/images/categories/hoodies.webp"
     },
     {
         href: "t-shirts",
         name: "T-Shirts",
-        image: "/images/categories/t-shirt.avif"
+        image: "/images/categories/t-shirt.webp"
     },
     {
         href: "pants",
         name: "Pants",
-        image: "/images/categories/pants.avif"
+        image: "/images/categories/pants.webp"
     },
     {
         href: "hats",
         name: "Hats",
-        image: "/images/categories/hat.avif"
+        image: "/images/categories/hat.webp"
     },
     {
         href: "footwear",
         name: "Footwear",
-        image: "/images/categories/footwear.avif"
+        image: "/images/categories/footwear.webp"
     },
     {
         href: "socks",
         name: "Socks",
-        image: "/images/categories/sock.avif"
+        image: "/images/categories/sock.webp"
     },
     {
         href: "accessories",
         name: "Accessories",
-        image: "/images/categories/accessories.avif"
+        image: "/images/categories/accessories.webp"
     },
     {
         href: "underwear",
         name: "Underwear",
-        image: "/images/categories/underwear.avif"
+        image: "/images/categories/underwear.webp"
     },
 
 ]
-//Accessories , Hats , Watches
