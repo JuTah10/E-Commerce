@@ -24,7 +24,7 @@ function HomePage() {
       {/* Wallpaper / Intro */}
       <div className='absolute top-0 left-0 w-full h-screen z-[-1]'>
         <img
-          src="https://res.cloudinary.com/dc3gnvd4e/image/upload/v1748039941/homePagewallpaper_c6s6gf.png"
+          src="https://res.cloudinary.com/dc3gnvd4e/image/upload/v1748039941/homePagewallpaper_c6s6gf.webp"
           alt='wallpaper'
           className='object-cover w-full h-full'
           onLoad={() => setImgLoaded(true)}

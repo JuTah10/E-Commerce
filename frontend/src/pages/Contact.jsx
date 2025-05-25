@@ -66,7 +66,7 @@ export default function Contact() {
                             scale: { duration: 0.3 },
                         }}
                         className='relative w-full h-full bg-cover bg-center text-white shadow-xl rounded-lg cursor-pointer'
-                        style={{ backgroundImage: 'url(https://res.cloudinary.com/dc3gnvd4e/image/upload/v1748097815/ContactPage_omnuju.png)' }}
+                        style={{ backgroundImage: 'url(https://res.cloudinary.com/dc3gnvd4e/image/upload/v1748097815/ContactPage_omnuju.webp)' }}
                     >
                         <div className='absolute inset-0 bg-black bg-opacity-50 rounded-lg'></div>
                         <div className='relative z-10 flex flex-col items-center justify-center h-full p-6 text-center'>
@@ -117,7 +117,7 @@ export default function Contact() {
                             delay: 0.2,
                             scale: { duration: 0.3 },
                         }}
-                        style={{ backgroundImage: 'url(https://res.cloudinary.com/dc3gnvd4e/image/upload/v1748097815/ContactPage_omnuju.png)' }}
+                        style={{ backgroundImage: 'url(https://res.cloudinary.com/dc3gnvd4e/image/upload/v1748097815/ContactPage_omnuju.webp)' }}
                         className='relative w-full h-full text-white shadow-xl rounded-lg cursor-pointer flex flex-col items-center justify-center'
                     >
                         <div className='absolute inset-0 bg-green-700 bg-opacity-50 rounded-lg'></div>
@@ -162,8 +162,7 @@ export default function Contact() {
                                 width: cardPosition.width,
                                 height: cardPosition.height,
                                 backgroundImage:
-
-                                    'url(https://res.cloudinary.com/dc3gnvd4e/image/upload/v1748097815/ContactPage_omnuju.png)'
+                                    'url(https://res.cloudinary.com/dc3gnvd4e/image/upload/v1748097815/ContactPage_omnuju.webp)'
                                 ,
                             }}
                             initial={{

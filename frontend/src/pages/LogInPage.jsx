@@ -126,7 +126,7 @@ function LogInPage() {
                     animate={!switchPage ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
                     transition={!switchPage ? { duration: 0.8 } : { duration: 0.8, delay: 1.0 }} //could include delay here to delay when it will show up
                 >
-                    <img src="https://res.cloudinary.com/dc3gnvd4e/image/upload/v1748097470/hoodiesSignInPage_pod1u9.avif" alt="Sneakers" className="h-full object-cover rounded-2xl" />
+                    <img src="https://res.cloudinary.com/dc3gnvd4e/image/upload/v1748097470/hoodiesSignInPage_pod1u9.webp" alt="Sneakers" className="h-full object-cover rounded-2xl" />
                 </motion.div>
 
             </div >

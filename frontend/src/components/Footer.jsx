@@ -10,7 +10,7 @@ export default function Footer() {
                 <img
                     className='max-h-[394.41px] w-full object-cover'
                     style={{ objectPosition: "center 20%" }}
-                    src="https://res.cloudinary.com/dc3gnvd4e/image/upload/v1748097618/footerWallPaper_gbd5bi.avif"
+                    src="https://res.cloudinary.com/dc3gnvd4e/image/upload/v1748097618/footerWallPaper_gbd5bi.webp"
                     alt="Footer Wallpaper" />
                 <div className='flex flex-col gap-4 w-full absolute top-[20%] sm:top-[30%] text-center text-white'>
                     <h1 className='text-4xl font-bold'>Ready to Find your Perfect Clothes?</h1>
