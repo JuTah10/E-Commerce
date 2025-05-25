@@ -1,16 +1,30 @@
 import React from 'react';
 import { Trash2, X, LoaderCircle } from 'lucide-react'; // or any cart/close icons
 import { useNavigate } from 'react-router-dom';
+import { loadStripe } from "@stripe/stripe-js";
 
 import { useCartStore } from '../store/useCartStore';
+import axios from "../lib/axios.js"
 
 
 function ShoppingCartPanel({ cartItem, isOpen, setIsOpen }) {
     const navigate = useNavigate();
     const { loading, deleteFromCart, subtotal } = useCartStore();
     const [deleteingItemId, setDeletingItemId] = React.useState(null);
+    const [checkoutLoading, setCheckoutLoading] = React.useState(false);
 
+    const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
+    async function handlePayment() {
+        setCheckoutLoading(true);
+        const stripe = await stripePromise;
+        const response = await axios.post(`/payment/create-checkout-session`, {
+            couponInfor: null
+        })
+        const session = response.data;
+        setCheckoutLoading(false);
+        window.location = session.url;
+    }
 
     return (
         <div>
@@ -135,13 +149,18 @@ function ShoppingCartPanel({ cartItem, isOpen, setIsOpen }) {
                             </button>
 
                             <button
-                                onClick={() => {
+                                onClick={async () => {
+                                    await handlePayment();
                                     setIsOpen(false);
-                                    navigate("/checkout");
                                 }}
-                                className="w-full bg-lime-600 text-white font-medium py-3 rounded-full hover:bg-lime-700 transition-all duration-500"
+                                className="w-full bg-lime-600 text-white font-medium py-3 rounded-full hover:bg-lime-700 transition-all duration-500 flex justify-center items-center"
                             >
-                                Checkout
+                                {checkoutLoading ?
+                                    <LoaderCircle className='animate-spin' />
+                                    :
+                                    "Checkout"
+                                }
+
                             </button>
 
                         </div>

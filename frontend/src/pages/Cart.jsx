@@ -1,7 +1,7 @@
 import React from 'react'
 import { useCartStore } from '../store/useCartStore'
 
-import { CircleX, Loader, LoaderCircle, ShoppingBasket } from "lucide-react"
+import { CircleX, LoaderCircle, ShoppingBasket } from "lucide-react"
 
 import { useNavigate } from 'react-router-dom';
 import { loadStripe } from "@stripe/stripe-js";
